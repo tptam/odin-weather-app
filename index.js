@@ -7,4 +7,12 @@ async function getWeatherData(city, unit) {
   return await response.json();
 }
 
-getWeatherData("tokushima", "metric").then((response) => console.log(response));
+function getCurrentWeather(json) {
+  const { icon, conditions, temp, humidity, windspeed } =
+    json.currentConditions;
+  return { icon, conditions, temp, humidity, windspeed };
+}
+
+getWeatherData("tokushima", "metric").then((json) =>
+  console.log(getCurrentWeather(json))
+);
