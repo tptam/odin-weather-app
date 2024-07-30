@@ -1,10 +1,19 @@
 const api_key = "PAVSPUMM5PSLVSLQL6BZAXUV4";
 
 async function getWeatherData(city, unit) {
-  const response = await fetch(
-    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=${unit}&key=${api_key}&iconSet=icons2&contentType=json`
-  );
-  return await response.json();
+  try {
+    const response = await fetch(
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=${unit}&key=${api_key}&iconSet=icons2&contentType=json`,
+      { mode: "cors" }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to retrieve data.");
+    } else {
+      return await response.json();
+    }
+  } catch (err) {
+    showError(err.message);
+  }
 }
 
 function getCurrentWeather(json) {
@@ -45,6 +54,8 @@ function getWeeklyForecast(json) {
   });
   return week;
 }
+
+function showError(message) {}
 
 getWeatherData("tokushima", "metric").then((json) => {
   console.log(getWeeklyForecast(json));
