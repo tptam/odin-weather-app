@@ -1,19 +1,19 @@
 const key = "PAVSPUMM5PSLVSLQL6BZAXUV4";
 
 async function getWeatherData(city, unit) {
-  try {
-    const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=${unit}&key=${key}&iconSet=icons2&contentType=json`,
-      { mode: "cors" }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to retrieve data.");
-    } else {
-      return await response.json();
-    }
-  } catch (err) {
-    showError(err.message);
+  const response = await fetch(
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=${unit}&key=${key}&iconSet=icons2&contentType=json`,
+    { mode: "cors" }
+  );
+  if (!response.ok) {
+    throw new Error("Failed to retrieve data.");
+  } else {
+    return await response.json();
   }
+}
+
+function getAddress(json) {
+  return json.resolvedAddress;
 }
 
 function getCurrentWeather(json) {
@@ -59,6 +59,27 @@ function showError(message) {
   console.log(message);
 }
 
-getWeatherData("tokushima", "metric").then((json) => {
-  console.log(getWeeklyForecast(json));
-});
+// presentation
+const current = {
+  date: document.querySelector(".current .date"),
+  icon: document.querySelector(".current .icon"),
+  conditions: document.querySelector(".current div.conditions"),
+  temp: document.querySelector(".current div.temp"),
+  humidity: document.querySelector(".current div.humidity"),
+  windspeed: document.querySelector(".current div.windspeed"),
+};
+const address = document.querySelector(".address");
+const search = document.querySelector(".search");
+
+async function updateScreen() {
+  const json = await getWeatherData("tokushima", "metric");
+  address.textContent = getAddress(json);
+  const curData = getCurrentWeather(json);
+  current.date.textContent = curData.date;
+  current.conditions.textContent = curData.conditions;
+  current.temp.textContent = curData.temp;
+  current.humidity.textContent = curData.humidity;
+  current.windspeed.textContent = curData.windspeed;
+}
+
+updateScreen().catch((error) => console.error(error));
