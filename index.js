@@ -35,7 +35,7 @@ function getCurrentWeather(json) {
 function getWeeklyForecast(json) {
   const week = json.days.slice(0, 7).map((day) => {
     const {
-      datetimeEpoch,
+      datetime,
       icon,
       conditions,
       temp,
@@ -46,7 +46,7 @@ function getWeeklyForecast(json) {
       precipprob,
     } = day;
     return {
-      date: new Date(datetimeEpoch * 1000),
+      date: datetime,
       icon,
       conditions,
       temp,
@@ -73,6 +73,16 @@ const current = {
   humidity: document.querySelector(".current div.humidity"),
   windspeed: document.querySelector(".current div.windspeed"),
 };
+
+const week = {
+  date: document.querySelectorAll(".week tr.date th[scope]"),
+  icon: document.querySelectorAll(".week tr.icon img"),
+  tempmax: document.querySelectorAll(".week tr.temp .max"),
+  tempmin: document.querySelectorAll(".week tr.temp .min"),
+  humidity: document.querySelectorAll(".week tr.humidity td"),
+  windspeed: document.querySelectorAll(".week tr.windspeed td"),
+};
+
 const address = document.querySelector(".address");
 const search = document.querySelector(".search");
 
@@ -80,6 +90,7 @@ async function updateScreen() {
   const json = await getWeatherData("tokushima", "metric");
   address.textContent = getAddress(json);
 
+  //   current weather
   const curData = getCurrentWeather(json);
   current.date.textContent = `${curData.date} ${curData.time.slice(0, -3)}`;
   current.conditions.textContent = curData.conditions;
@@ -88,6 +99,17 @@ async function updateScreen() {
   current.windspeed.textContent = curData.windspeed;
   current.icon.src = `./images/${curData.icon}.svg`;
   current.icon.alt = `${curData.icon} icon`;
+
+  //   weekly forecast
+  const weekData = getWeeklyForecast(json);
+  weekData.forEach((day, index) => {
+    week.date[index].textContent = day.date;
+    week.icon[index].src = `./images/${day.icon}.svg`;
+    week.tempmax[index].textContent = day.tempmax;
+    week.tempmin[index].textContent = day.tempmin;
+    week.humidity[index].textContent = day.humidity + "%";
+    week.windspeed[index].textContent = day.windspeed;
+  });
 }
 
 updateScreen().catch((error) => console.error(error));

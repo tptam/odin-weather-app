@@ -12,3 +12,8 @@ a {
 ul {
     list-style: none;
 }
+
+
+img.icon{
+    width: 200px;
+}
