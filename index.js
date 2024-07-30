@@ -75,11 +75,13 @@ async function updateScreen() {
   const json = await getWeatherData("tokushima", "metric");
   address.textContent = getAddress(json);
   const curData = getCurrentWeather(json);
-  current.date.textContent = curData.date;
+  current.date.textContent = curData.date.toLocaleString("sv-SE").slice(0, -3);
   current.conditions.textContent = curData.conditions;
   current.temp.textContent = curData.temp;
   current.humidity.textContent = curData.humidity;
   current.windspeed.textContent = curData.windspeed;
 }
+
+function formatDate(date) {}
 
 updateScreen().catch((error) => console.error(error));
