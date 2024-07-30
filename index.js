@@ -17,10 +17,13 @@ function getAddress(json) {
 }
 
 function getCurrentWeather(json) {
-  const { datetimeEpoch, icon, conditions, temp, humidity, windspeed } =
+  const date = json.days[0].datetime;
+  const time = json.currentConditions.datetime;
+  const { icon, conditions, temp, humidity, windspeed } =
     json.currentConditions;
   return {
-    date: new Date(datetimeEpoch * 1000),
+    date,
+    time,
     icon,
     conditions,
     temp,
@@ -40,6 +43,7 @@ function getWeeklyForecast(json) {
       tempmin,
       humidity,
       windspeed,
+      precipprob,
     } = day;
     return {
       date: new Date(datetimeEpoch * 1000),
@@ -50,6 +54,7 @@ function getWeeklyForecast(json) {
       tempmin,
       humidity,
       windspeed,
+      precipprob,
     };
   });
   return week;
@@ -74,14 +79,15 @@ const search = document.querySelector(".search");
 async function updateScreen() {
   const json = await getWeatherData("tokushima", "metric");
   address.textContent = getAddress(json);
+
   const curData = getCurrentWeather(json);
-  current.date.textContent = curData.date.toLocaleString("sv-SE").slice(0, -3);
+  current.date.textContent = `${curData.date} ${curData.time.slice(0, -3)}`;
   current.conditions.textContent = curData.conditions;
   current.temp.textContent = curData.temp;
-  current.humidity.textContent = curData.humidity;
+  current.humidity.textContent = curData.humidity + "%";
   current.windspeed.textContent = curData.windspeed;
+  current.icon.src = `./images/${curData.icon}.svg`;
+  current.icon.alt = `${curData.icon} icon`;
 }
-
-function formatDate(date) {}
 
 updateScreen().catch((error) => console.error(error));
