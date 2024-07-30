@@ -8,11 +8,44 @@ async function getWeatherData(city, unit) {
 }
 
 function getCurrentWeather(json) {
-  const { icon, conditions, temp, humidity, windspeed } =
+  const { datetimeEpoch, icon, conditions, temp, humidity, windspeed } =
     json.currentConditions;
-  return { icon, conditions, temp, humidity, windspeed };
+  return {
+    date: new Date(datetimeEpoch * 1000),
+    icon,
+    conditions,
+    temp,
+    humidity,
+    windspeed,
+  };
 }
 
-getWeatherData("tokushima", "metric").then((json) =>
-  console.log(getCurrentWeather(json))
-);
+function getWeeklyForecast(json) {
+  const week = json.days.slice(0, 7).map((day) => {
+    const {
+      datetimeEpoch,
+      icon,
+      conditions,
+      temp,
+      tempmax,
+      tempmin,
+      humidity,
+      windspeed,
+    } = day;
+    return {
+      date: new Date(datetimeEpoch * 1000),
+      icon,
+      conditions,
+      temp,
+      tempmax,
+      tempmin,
+      humidity,
+      windspeed,
+    };
+  });
+  return week;
+}
+
+getWeatherData("tokushima", "metric").then((json) => {
+  console.log(getWeeklyForecast(json));
+});
