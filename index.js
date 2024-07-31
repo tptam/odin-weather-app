@@ -84,11 +84,11 @@ const week = {
 };
 
 const address = document.querySelector(".address");
-const search = document.querySelector(".search");
+const search = document.querySelector("#search");
 const celsius = document.querySelector("#celsius");
 const fahrenheit = document.querySelector("#fahrenheit");
-
-let json;
+const form = document.querySelector("form");
+const loading = document.querySelector("dialog");
 
 function getTempExpression(tempInC) {
   if (celsius.checked) {
@@ -109,7 +109,9 @@ function switchTempUnit() {
 }
 
 async function updateScreen() {
-  json = await getWeatherData("tokushima", "metric");
+  loading.showModal();
+  json = await getWeatherData(search.value, "metric");
+  loading.close();
   address.textContent = getAddress(json);
 
   //   current weather
@@ -135,5 +137,16 @@ async function updateScreen() {
 }
 
 updateScreen().catch((error) => console.error(error));
+
 celsius.addEventListener("change", switchTempUnit);
 fahrenheit.addEventListener("change", switchTempUnit);
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (search.validity.valueMissing) {
+    search.setCustomValidity("Please enter address");
+    return;
+  } else {
+    search.setCustomValidity("");
+  }
+  updateScreen().catch((error) => console.error(error));
+});

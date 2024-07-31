@@ -9,17 +9,21 @@
     <title>Weather App</title>
 </head>
 <body>
+    <dialog class="load">
+        <img src="./images/loading.svg" alt="loading animation" width="100" height="100">
+        Fetching data...
+    </dialog>
     <h1>Weather App</h1>
     <form>
-        <input type="text" name="search" id="search">
-        <fieldset>
-            <label for="celsius">°C</label>
-            <input type="radio" name="unit" id="celsius">
-            <label for="fahrenheit">°F</label>
-            <input type="radio" name="unit" id="fahrenheit" checked>
-        </fieldset>
-        <button type="button">Submit</button>
+        <input type="text" name="search" id="search" value="Reykjavik" required>
+        <button type="submit">Submit</button>
     </form>
+    <fieldset>
+        <label for="celsius">°C</label>
+        <input type="radio" name="unit" id="celsius" checked>
+        <label for="fahrenheit">°F</label>
+        <input type="radio" name="unit" id="fahrenheit">
+    </fieldset>
     <h2 class="address"></h2>
     <section class="current">
         <h3>Current Conditions (<span class="date"></span>)</h3>
