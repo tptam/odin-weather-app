@@ -94,8 +94,18 @@ function getTempExpression(tempInC) {
   if (celsius.checked) {
     return `${tempInC} °C`;
   } else {
-    return `${Math.round(tempInC * 1.8 + 32)} °F`;
+    return `${Math.round(10 * (tempInC * 1.8 + 32)) / 10} °F`;
   }
+}
+
+function switchTempUnit() {
+  const curData = getCurrentWeather(json);
+  current.temp.textContent = getTempExpression(curData.temp);
+  const weekData = getWeeklyForecast(json);
+  weekData.forEach((day, index) => {
+    week.tempmax[index].textContent = getTempExpression(day.tempmax);
+    week.tempmin[index].textContent = getTempExpression(day.tempmin);
+  });
 }
 
 async function updateScreen() {
@@ -125,3 +135,5 @@ async function updateScreen() {
 }
 
 updateScreen().catch((error) => console.error(error));
+celsius.addEventListener("change", switchTempUnit);
+fahrenheit.addEventListener("change", switchTempUnit);
