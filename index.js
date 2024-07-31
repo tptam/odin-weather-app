@@ -85,18 +85,30 @@ const week = {
 
 const address = document.querySelector(".address");
 const search = document.querySelector(".search");
+const celsius = document.querySelector("#celsius");
+const fahrenheit = document.querySelector("#fahrenheit");
+
+let json;
+
+function getTempExpression(tempInC) {
+  if (celsius.checked) {
+    return `${tempInC} °C`;
+  } else {
+    return `${Math.round(tempInC * 1.8 + 32)} °F`;
+  }
+}
 
 async function updateScreen() {
-  const json = await getWeatherData("tokushima", "metric");
+  json = await getWeatherData("tokushima", "metric");
   address.textContent = getAddress(json);
 
   //   current weather
   const curData = getCurrentWeather(json);
   current.date.textContent = `${curData.date} ${curData.time.slice(0, -3)}`;
   current.conditions.textContent = curData.conditions;
-  current.temp.textContent = curData.temp;
-  current.humidity.textContent = curData.humidity + "%";
-  current.windspeed.textContent = curData.windspeed;
+  current.temp.textContent = getTempExpression(curData.temp);
+  current.humidity.textContent = curData.humidity + " %";
+  current.windspeed.textContent = curData.windspeed + " m/s";
   current.icon.src = `./images/${curData.icon}.svg`;
   current.icon.alt = `${curData.icon} icon`;
 
@@ -105,10 +117,10 @@ async function updateScreen() {
   weekData.forEach((day, index) => {
     week.date[index].textContent = day.date;
     week.icon[index].src = `./images/${day.icon}.svg`;
-    week.tempmax[index].textContent = day.tempmax;
-    week.tempmin[index].textContent = day.tempmin;
-    week.humidity[index].textContent = day.humidity + "%";
-    week.windspeed[index].textContent = day.windspeed;
+    week.tempmax[index].textContent = getTempExpression(day.tempmax);
+    week.tempmin[index].textContent = getTempExpression(day.tempmin);
+    week.humidity[index].textContent = day.humidity + " %";
+    week.windspeed[index].textContent = day.windspeed + " m/s";
   });
 }
 
