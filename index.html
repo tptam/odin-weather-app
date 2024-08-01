@@ -13,90 +13,112 @@
         <img src="./images/loading.svg" alt="loading animation" width="100" height="100">
         Fetching data...
     </dialog>
-    <h1>Weather App</h1>
-    <form>
-        <input type="text" name="search" id="search" value="Reykjavik" required>
-        <button type="submit">Submit</button>
-    </form>
-    <fieldset>
-        <label for="celsius">°C</label>
-        <input type="radio" name="unit" id="celsius" checked>
-        <label for="fahrenheit">°F</label>
-        <input type="radio" name="unit" id="fahrenheit">
-    </fieldset>
-    <h2 class="address"></h2>
-    <section class="current">
-        <h3>Current Conditions (<span class="date"></span>)</h3>
-        <div>
-            <img src="" class="icon">
-            <h4 class="conditions">Conditions</h4>
-            <div class="conditions"></div>
-            <h4 class="temp">Temperature</h4>
-            <div class="temp"></div>
-            <h4 class="humidity">Humidity</h4>
-            <div class="humidity"></div>
-            <h4 class="windspeed">Windspeed</h4>
-            <div class="windspeed"></div>
-        </div>
-    </section>
-    <section class="week">
-        <h3>Weekly Forecas</h3>
-        <table>
-            <thead>
-                <tr class="date">
-                    <th></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="icon">
-                    <td></td>
-                    <td><img src="" class="icon"></td>
-                    <td><img src="" class="icon"></td>
-                    <td><img src="" class="icon"></td>
-                    <td><img src="" class="icon"></td>
-                    <td><img src="" class="icon"></td>
-                    <td><img src="" class="icon"></td>
-                    <td><img src="" class="icon"></td>
-                </tr>
-                <tr class="temp">
-                    <th scope="row">Temperature</th>
-                    <td><span class="max"></span><span class="min"></span></td>
-                    <td><span class="max"></span><span class="min"></span></td>
-                    <td><span class="max"></span><span class="min"></span></td>
-                    <td><span class="max"></span><span class="min"></span></td>
-                    <td><span class="max"></span><span class="min"></span></td>
-                    <td><span class="max"></span><span class="min"></span></td>
-                    <td><span class="max"></span><span class="min"></span></td>
-                </tr>
-                <tr class="humidity">
-                    <th scope="row">Humidity</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr class="windspeed">
-                    <th scope="row">Wind Speed</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+    <header>
+        <h1>Weather App</h1>
+        <form>
+            <input type="text" name="search" id="search" value="Reykjavik" required>
+            <button type="submit">Submit</button>
+        </form>
+        <fieldset>
+            <label for="celsius">°C</label>
+            <input type="radio" name="unit" id="celsius" checked>
+            <label for="fahrenheit">°F</label>
+            <input type="radio" name="unit" id="fahrenheit">
+        </fieldset>
+    </header>
+    <div id="error" hidden>
+        <img src="./images/question_mark_weather_unknown.svg" alt="Cloud and a question mark">
+        <h2 class="error-message"></h2>
+    </div>
+    <div id="content">
+        <h2 class="address"></h2>
+        <section class="current">
+            <h3>Current Conditions (<span class="date"></span>)</h3>
+            <div>
+                <img src="" class="icon">
+                <h4 class="conditions">Conditions</h4>
+                <div class="conditions"></div>
+                <h4 class="temp">Temperature</h4>
+                <div class="temp"></div>
+                <h4 class="humidity">Humidity</h4>
+                <div class="humidity"></div>
+                <h4 class="windspeed">Windspeed</h4>
+                <div class="windspeed"></div>
+            </div>
+        </section>
+        <section class="week">
+            <h3>Weekly Forecast</h3>
+            <table>
+                <thead>
+                    <tr class="date">
+                        <th></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="icon">
+                        <td></td>
+                        <td><img src="" class="icon"></td>
+                        <td><img src="" class="icon"></td>
+                        <td><img src="" class="icon"></td>
+                        <td><img src="" class="icon"></td>
+                        <td><img src="" class="icon"></td>
+                        <td><img src="" class="icon"></td>
+                        <td><img src="" class="icon"></td>
+                    </tr>
+                    <tr class="temp">
+                        <th scope="row">Temperature</th>
+                        <td><span class="max"></span><span class="min"></span></td>
+                        <td><span class="max"></span><span class="min"></span></td>
+                        <td><span class="max"></span><span class="min"></span></td>
+                        <td><span class="max"></span><span class="min"></span></td>
+                        <td><span class="max"></span><span class="min"></span></td>
+                        <td><span class="max"></span><span class="min"></span></td>
+                        <td><span class="max"></span><span class="min"></span></td>
+                    </tr>
+                    <tr class="humidity">
+                        <th scope="row">Humidity</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="windspeed">
+                        <th scope="row">Wind Speed</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <footer>
+        <span class="copyright">Copyright © tptam 2024</span>
+        <span class="asset">
+            <a href="https://github.com/visualcrossing/WeatherIcons/">
+            WeatherIcons</a>by Visual Crossing
+        </span> 
+        <span class="asset">
+            <a href="https://www.benricho.org/loading_images/svg01.html">
+                Loading icon</a> by みんなの知識 ちょっと便利帳
+        </span>
+        <span class="asset">
+            Icons made from <a href="https://www.onlinewebfonts.com/icon">svg icons</a>is licensed by CC BY 4.0
+        </span>
+    </footer>
 </body>
 </html>

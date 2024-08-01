@@ -6,7 +6,7 @@ async function getWeatherData(city, unit) {
     { mode: "cors" }
   );
   if (!response.ok) {
-    throw new Error("Failed to retrieve data.");
+    throw new Error("failed to retrieve data.");
   } else {
     return await response.json();
   }
@@ -60,10 +60,6 @@ function getWeeklyForecast(json) {
   return week;
 }
 
-function showError(message) {
-  console.log(message);
-}
-
 // presentation
 const current = {
   date: document.querySelector(".current .date"),
@@ -83,6 +79,8 @@ const week = {
   windspeed: document.querySelectorAll(".week tr.windspeed td"),
 };
 
+const content = document.querySelector("#content");
+const error = document.querySelector("#error");
 const address = document.querySelector(".address");
 const search = document.querySelector("#search");
 const celsius = document.querySelector("#celsius");
@@ -108,10 +106,25 @@ function switchTempUnit() {
   });
 }
 
+function showError(message) {
+  error.querySelector(".error-message").textContent = "Error: " + message;
+  loading.close();
+  content.hidden = true;
+  error.hidden = false;
+}
+
+function hideError() {
+  error.querySelector(".error-message").textContent = "";
+  content.hidden = false;
+  error.hidden = true;
+}
+
 async function updateScreen() {
   loading.showModal();
   json = await getWeatherData(search.value, "metric");
   loading.close();
+  hideError();
+
   address.textContent = getAddress(json);
 
   //   current weather
@@ -136,7 +149,7 @@ async function updateScreen() {
   });
 }
 
-updateScreen().catch((error) => console.error(error));
+updateScreen().catch((error) => showError(error.message));
 
 celsius.addEventListener("change", switchTempUnit);
 fahrenheit.addEventListener("change", switchTempUnit);
@@ -148,5 +161,5 @@ form.addEventListener("submit", (event) => {
   } else {
     search.setCustomValidity("");
   }
-  updateScreen().catch((error) => console.error(error));
+  updateScreen().catch((error) => showError(error.message));
 });
