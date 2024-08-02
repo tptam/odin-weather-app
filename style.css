@@ -78,7 +78,7 @@ body[data-sky="black"],
 body[data-sky="black"] header,
 body[data-sky="black"] #content * 
 {
-    background-color: rgb(0, 28, 46);
+    background-color: #002f4d;
 }
 
 body[data-sky="orange"], 
