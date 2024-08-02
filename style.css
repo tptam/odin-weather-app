@@ -1,3 +1,7 @@
+:root {
+    --gutter: 16px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -35,7 +39,10 @@ dialog::backdrop {
 body {
     color: #fafafa;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 20px;
+    font-size: 18px;
+    min-height: 100vh;
+    background-color: skyblue;
+    padding: var(--gutter);
 }
 
 body[data-sky="blue"] {

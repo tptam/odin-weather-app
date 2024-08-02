@@ -6,6 +6,7 @@ async function getWeatherData(city, unit) {
   //     { mode: "cors" }
   //   );
   const response = await fetch("./dummy.json");
+  throw new Error("failed to retrieve data.");
 
   if (!response.ok) {
     throw new Error("failed to retrieve data.");
