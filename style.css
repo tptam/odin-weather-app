@@ -1,5 +1,6 @@
 :root {
     --gutter: 16px;
+    --half-gutter: 8px;
 }
 
 * {
@@ -70,4 +71,52 @@ header {
 footer {
     position: absolute;
     bottom: 0;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: var(--gutter);
+}
+
+
+label {
+    flex: 1;
+    max-width: 60ch;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+input#search {
+    font-size: 1.2rem;
+    min-width: min(100%, 50ch);
+    padding: 0.5ch 1ch;
+    border-radius: 2ch;
+    border-style: none;
+}
+
+button {
+    flex: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5ch 3ch;
+    border-style: none;
+    border-radius: 2ch;
+    color: #525252;
+}
+
+fieldset {
+    border: none;
+    padding: var(--gutter) 0;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+    gap: var(--gutter);
+}
+
+input[type="radio"] {
+    transform: scale(1.5);
+    accent-color: #737373;
 }

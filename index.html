@@ -16,14 +16,18 @@
     <header>
         <h1>Weather App</h1>
         <form>
-            <input type="text" name="search" id="search" value="Reykjavik" required>
-            <button type="submit">Submit</button>
+            <label for="search">Location
+                <input type="text" name="search" id="search" placeholder="(partial) address or latitude/longitude" required>
+            </label>
+            <button type="submit">Search</button>
         </form>
         <fieldset>
-            <label for="celsius">°C</label>
-            <input type="radio" name="unit" id="celsius" checked>
-            <label for="fahrenheit">°F</label>
-            <input type="radio" name="unit" id="fahrenheit">
+            <label for="celsius">°C
+                <input type="radio" name="unit" id="celsius" checked>
+            </label>
+            <label for="fahrenheit">°F
+                <input type="radio" name="unit" id="fahrenheit">
+            </label>
         </fieldset>
     </header>
     <div id="error" hidden>
