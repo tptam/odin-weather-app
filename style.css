@@ -104,6 +104,10 @@ input#search {
     border-style: none;
 }
 
+input#search:focus {
+    outline: 2px solid skyblue;
+}
+
 button {
     flex: none;
     font-size: 1.2rem;
@@ -112,6 +116,15 @@ button {
     border-style: none;
     border-radius: 2ch;
     color: #525252;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    outline: 2px solid #efefef;
+    outline-offset: 2px;
 }
 
 fieldset {

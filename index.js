@@ -67,10 +67,12 @@ function getSkyColor(json) {
   const sunrise = new Date(json.days[0].sunriseEpoch * 1000);
   const sunset = new Date(json.days[0].sunsetEpoch * 1000);
   const cloudcover = json.currentConditions.cloudcover;
-  console.log(cloudcover);
   const now = new Date();
   const hourInMillisec = 3600000;
-  if (Math.abs(now - sunrise) < 3600000 || Math.abs(now - sunset) < 3600000) {
+  if (
+    Math.abs(now - sunrise) < hourInMillisec / 2 ||
+    Math.abs(now - sunset) < hourInMillisec / 2
+  ) {
     return "orange";
   } else if (now > sunrise && now < sunset) {
     return cloudcover > 75 ? "gray" : "blue";
@@ -177,7 +179,8 @@ fahrenheit.addEventListener("change", switchTempUnit);
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   if (search.validity.valueMissing) {
-    search.setCustomValidity("Please enter address");
+    search.setCustomValidity("Please enter location");
+    search.reportValidity();
     return;
   } else {
     search.setCustomValidity("");
