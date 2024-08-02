@@ -188,7 +188,8 @@ footer {
 }
 
 h2.address {
-    margin: calc(var(--gutter) * 2) 0;
+    width: min(800px, 100%);
+    margin: calc(var(--gutter) * 2) auto;
 }
 
 section {
