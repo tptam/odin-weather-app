@@ -346,7 +346,8 @@ h3 {
         grid-template-columns: repeat(3, auto);
     }
 
-    .week .humidity, .week .windspeed {
+    .week th.humidity, .week th.windspeed,
+        .week td.humidity, .week td.windspeed {
         display: none;
     }
 
