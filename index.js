@@ -168,7 +168,6 @@ async function updateScreen() {
   current.icon.alt = `${curData.icon} icon`;
 
   //   weekly forecast
-  week.description.textContent = getDescription(json);
   const weekData = getWeeklyForecast(json);
   weekData.forEach((day, index) => {
     const dt = new Date(day.date);
