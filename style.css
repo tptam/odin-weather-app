@@ -42,24 +42,25 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 18px;
     min-height: 100vh;
+    width: 100%;
     background-color: skyblue;
-    padding: var(--gutter);
+    padding: 0 var(--gutter) var(--gutter);
     position: relative;
 }
 
-body[data-sky="blue"] {
+body[data-sky="blue"], body[data-sky="blue"] header{
     background-color: #0094d7;
 }
 
-body[data-sky="gray"] {
+body[data-sky="gray"], body[data-sky="gray"] header {
     background-color: rgb(104, 104, 104);
 }
 
-body[data-sky="black"] {
+body[data-sky="black"], body[data-sky="black"] header {
     background-color: rgb(0, 28, 46);
 }
 
-body[data-sky="orange"] {
+body[data-sky="orange"], body[data-sky="orange"] header {
     background-color: #ff7a00;
 }
 
@@ -68,11 +69,7 @@ header {
     top: 0;
     display: grid;
     gap: var(--half-gutter);
-}
-
-footer {
-    position: absolute;
-    bottom: 0;
+    padding: var(--gutter) 0;
 }
 
 form {
@@ -121,4 +118,17 @@ fieldset {
 input[type="radio"] {
     transform: scale(1.5);
     accent-color: #737373;
+}
+
+footer {
+    padding: calc(var(--gutter)*3) 0 0;
+    position: sticky;
+    top: 100vh;
+    right: 0;
+    left: 0;
+    font-size: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--gutter);
+    justify-content: center;
 }
