@@ -242,6 +242,7 @@ h3 {
 .week table {
     display: grid;
     grid-template-columns: repeat(5, auto);
+    column-gap: var(--gutter);
 }
 
 .week thead, .week tbody, .week tr{
@@ -252,6 +253,14 @@ h3 {
     display: grid;
     align-items: center;
     justify-items: center;
+}
+
+th.temp, th.humidity, th.windspeed {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    min-width: 50px;
 }
 
 .week tbody .date {
@@ -271,22 +280,37 @@ h3 {
     width: 150px;
 }
 
+.week .temp span {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+}
+
 .week .temp .max {
     font-size: 1.8rem;
     font-weight: bold;
+    line-height: 1;
+    text-align: center;
 }
 
 .week .temp .min {
     font-size: 1.2rem;
+    text-align: center;
 }
 
-.week .humidity,
-.week .windspeed {
+.week th.humidity,
+.week th.windspeed {
     text-align: right;
 }
 
+.week td.humidity,
+.week td.windspeed {
+    justify-items: end;
+    text-align: right;
+}
 
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 550px) {
     .current .summary {
         grid-template-rows: auto auto;
         grid-template-areas: "icon temp" "conditions conditions";
