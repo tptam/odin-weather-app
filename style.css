@@ -85,7 +85,7 @@ body[data-sky="orange"],
 body[data-sky="orange"] header,
 body[data-sky="orange"] #content * 
 {
-    background-color: #ff7a00;
+    background-color: #ff8322;
 }
 
 header {
@@ -111,13 +111,21 @@ label {
     max-width: 60ch;
     font-size: 1.2rem;
     font-weight: bold;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--half-gutter);
+}
+
+label[for="search"] {
+    min-width: min(43ch, 100%);
 }
 
 input#search {
+    flex: 1;
     font-size: 1.2rem;
     min-width: min(100%, 50ch);
     padding: 0.5ch 1ch;
-    border-radius: 2ch;
+    border-radius: 8px;
     border-style: none;
     background-color: #fafafa;
 }
