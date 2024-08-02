@@ -285,6 +285,7 @@ th.temp, th.humidity, th.windspeed {
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: center;
+    column-gap: var(--half-gutter);
 }
 
 .week .temp .max {
