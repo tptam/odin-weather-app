@@ -10,7 +10,6 @@
 }
 
 a {
-    text-decoration: none;
     color: inherit;
 }
 
@@ -186,6 +185,8 @@ footer {
     column-gap: var(--gutter);
     justify-content: center;
 }
+
+
 
 h2.address {
     width: min(800px, 100%);
