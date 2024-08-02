@@ -43,6 +43,7 @@ body {
     min-height: 100vh;
     background-color: skyblue;
     padding: var(--gutter);
+    position: relative;
 }
 
 body[data-sky="blue"] {
@@ -59,4 +60,14 @@ body[data-sky="black"] {
 
 body[data-sky="orange"] {
     background-color: #ff7a00;
+}
+
+header {
+    position: sticky;
+    top: 0;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
 }
