@@ -24,7 +24,7 @@ img.icon{
 }
 
 
-dialog.load {
+dialog.load[open] {
     width: min(300px, 100%);
     height: min(300px, 100%);
     background-color: transparent;
@@ -32,7 +32,15 @@ dialog.load {
     inset: 0;
     margin: auto;
     border: none;
+    color: inherit;
+    font-size: 1.5rem;
+    display: grid;
+    align-content: flex-start;
+    justify-items: center;
+    gap: var(--gutter);
 }
+
+
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
 }
@@ -43,7 +51,7 @@ body {
     font-size: 18px;
     min-height: 100vh;
     width: 100%;
-    background-color: skyblue;
+    background-color: gray;
     padding: 0 var(--gutter) var(--gutter);
     position: relative;
 }
