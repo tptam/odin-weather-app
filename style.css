@@ -88,9 +88,36 @@ body[data-sky="orange"] #content *
     color: #262626;
 }
 
-body[data-sky="orange"] #content img.icon {
+body[data-sky="orange"] #content img.icon,
+body[data-sky="orange"] #error img
+ {
     background-color: transparent;
     filter: brightness(0.1);
+}
+
+body[data-sky="orange"] input#search {
+    border-color: #262626;
+    color: #262626;
+}
+
+body[data-sky="orange"] input#search:focus {
+    outline-color: #262626;
+}
+
+
+body[data-sky="orange"] button {
+    border-color: #262626;
+    color: #262626;
+}
+
+body[data-sky="orange"] button:focus,
+body[data-sky="orange"] button:active {
+    outline-color: #262626;
+}
+
+
+body[data-sky="orange"] input[type="radio"] {
+    accent-color: #262626;
 }
 
 header {
@@ -132,11 +159,14 @@ input#search {
     padding: 0.5ch 1ch;
     border-radius: 8px;
     border-style: none;
-    background-color: #fafafa;
+    background-color: transparent;
+    border: 2px solid #fafafa;
+    color: #fafafa;
 }
 
 input#search:focus {
-    outline: 2px solid #ababab;
+    outline: 2px solid #fafafa;
+    outline-offset: 2px;
 }
 
 button[type="submit"] {
@@ -146,14 +176,16 @@ button[type="submit"] {
     padding: 0.5ch 3ch;
     border-style: none;
     border-radius: 2ch;
-    color: #525252;
-    background-color: #efefef;
+    color: #fafafa;
+    background-color: transparent;
+    border: 2px solid #fafafa;
 }
 
 button:hover {
     cursor: pointer;
 }
 
+button:focus,
 button:active {
     outline: 2px solid #efefef;
     outline-offset: 2px;
