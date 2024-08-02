@@ -35,6 +35,10 @@ function getCurrentWeather(json) {
   };
 }
 
+function getDescription(json) {
+  return json.description;
+}
+
 function getWeeklyForecast(json) {
   const week = json.days.slice(0, 7).map((day) => {
     const {
@@ -92,12 +96,14 @@ const current = {
 };
 
 const week = {
-  date: document.querySelectorAll(".week tr.date th[scope]"),
-  icon: document.querySelectorAll(".week tr.icon img"),
-  tempmax: document.querySelectorAll(".week tr.temp .max"),
-  tempmin: document.querySelectorAll(".week tr.temp .min"),
-  humidity: document.querySelectorAll(".week tr.humidity td"),
-  windspeed: document.querySelectorAll(".week tr.windspeed td"),
+  description: document.querySelector(".week .description"),
+  monthDay: document.querySelectorAll(".week tbody .month-day"),
+  weekday: document.querySelectorAll(".week tbody .weekday"),
+  icon: document.querySelectorAll(".week tbody img.icon"),
+  tempmax: document.querySelectorAll(".week tbody .max"),
+  tempmin: document.querySelectorAll(".week tbody .min"),
+  humidity: document.querySelectorAll(".week tbody .humidity"),
+  windspeed: document.querySelectorAll(".week tbody .windspeed"),
 };
 
 const body = document.querySelector("body");
@@ -110,11 +116,14 @@ const fahrenheit = document.querySelector("#fahrenheit");
 const form = document.querySelector("form");
 const loading = document.querySelector("dialog");
 
-function getTempExpression(tempInC) {
+const DAYNAMES = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+function getTempExpression(tempInC, noCF = false) {
   if (celsius.checked) {
-    return `${tempInC} °C`;
+    return !noCF ? `${tempInC} °C` : `${tempInC}°`;
   } else {
-    return `${Math.round(10 * (tempInC * 1.8 + 32)) / 10} °F`;
+    const degree = Math.round(10 * (tempInC * 1.8 + 32)) / 10;
+    return !noCF ? `${degree} °F` : `${degree}°`;
   }
 }
 
@@ -123,8 +132,8 @@ function switchTempUnit() {
   current.temp.textContent = getTempExpression(curData.temp);
   const weekData = getWeeklyForecast(json);
   weekData.forEach((day, index) => {
-    week.tempmax[index].textContent = getTempExpression(day.tempmax);
-    week.tempmin[index].textContent = getTempExpression(day.tempmin);
+    week.tempmax[index].textContent = getTempExpression(day.tempmax, true);
+    week.tempmin[index].textContent = getTempExpression(day.tempmin, true);
   });
 }
 
@@ -161,12 +170,17 @@ async function updateScreen() {
   current.icon.alt = `${curData.icon} icon`;
 
   //   weekly forecast
+  week.description.textContent = getDescription(json);
   const weekData = getWeeklyForecast(json);
   weekData.forEach((day, index) => {
-    week.date[index].textContent = day.date;
+    const dt = new Date(day.date);
+    week.weekday[index].textContent =
+      index === 0 ? "Today" : DAYNAMES[dt.getDay()];
+    week.monthDay[index].textContent = `${dt.getMonth()}/${dt.getDate()}`;
     week.icon[index].src = `./images/${day.icon}.svg`;
-    week.tempmax[index].textContent = getTempExpression(day.tempmax);
-    week.tempmin[index].textContent = getTempExpression(day.tempmin);
+    week.icon[index].alt = `${day.icon} icon`;
+    week.tempmax[index].textContent = getTempExpression(day.tempmax, true);
+    week.tempmin[index].textContent = getTempExpression(day.tempmin, true);
     week.humidity[index].textContent = day.humidity + " %";
     week.windspeed[index].textContent = day.windspeed + " m/s";
   });
