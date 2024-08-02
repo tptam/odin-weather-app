@@ -66,6 +66,8 @@ body[data-sky="orange"] {
 header {
     position: sticky;
     top: 0;
+    display: grid;
+    gap: var(--half-gutter);
 }
 
 footer {
@@ -108,8 +110,8 @@ button {
 }
 
 fieldset {
+    padding-top: var(--half-gutter);
     border: none;
-    padding: var(--gutter) 0;
     display: grid;
     grid-auto-flow: column;
     justify-content: flex-start;
