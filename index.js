@@ -1,11 +1,11 @@
 const key = "PAVSPUMM5PSLVSLQL6BZAXUV4";
 
 async function getWeatherData(city, unit) {
-  //   const response = await fetch(
-  //     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=${unit}&key=${key}&iconSet=icons2&contentType=json`,
-  //     { mode: "cors" }
-  //   );
-  const response = await fetch("./dummy.json");
+  const response = await fetch(
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=${unit}&key=${key}&iconSet=icons2&contentType=json`,
+    { mode: "cors" }
+  );
+  //   const response = await fetch("./dummy.json");
   //   throw new Error("failed to retrieve data.");
 
   if (!response.ok) {

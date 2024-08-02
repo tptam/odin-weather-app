@@ -85,7 +85,13 @@ body[data-sky="orange"],
 body[data-sky="orange"] header,
 body[data-sky="orange"] #content * 
 {
-    background-color: #ff8322;
+    background-color: #FF9838;
+    color: #262626;
+}
+
+body[data-sky="orange"] #content img.icon {
+    background-color: transparent;
+    filter: brightness(0.1);
 }
 
 header {
@@ -131,7 +137,7 @@ input#search {
 }
 
 input#search:focus {
-    outline: 2px solid skyblue;
+    outline: 2px solid #ababab;
 }
 
 button[type="submit"] {
@@ -244,6 +250,7 @@ h3 {
 }
 
 .week .description {
+    font-size: 1.2rem;
     margin-bottom: var(--gutter);
 }
 
@@ -253,17 +260,22 @@ h3 {
     column-gap: var(--gutter);
 }
 
-.week thead, .week tbody, .week tr{
+.week thead,
+.week tbody,
+.week tr{
     display: contents;
 }
 
-.week th, .week td {
+.week th,
+.week td {
     display: grid;
     align-items: center;
     justify-items: center;
 }
 
-th.temp, th.humidity, th.windspeed {
+.week th.temp,
+.week th.humidity, 
+.week th.windspeed {
     display: block;
     overflow: hidden;
     white-space: nowrap;
@@ -273,7 +285,9 @@ th.temp, th.humidity, th.windspeed {
 
 .week tbody .date {
     height: 150px;
+    grid-auto-flow: row;
 }
+
 
 .week .weekday {
     align-self: end;
